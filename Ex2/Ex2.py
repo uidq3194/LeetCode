@@ -1,6 +1,8 @@
 '''
 Link :https://leetcode.com/problems/two-sum/
 
+Difficulty :Easy
+
 Title : 1. Two Sum   
 
 Description:
