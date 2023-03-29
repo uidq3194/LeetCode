@@ -1,61 +1,56 @@
 '''
-Link : https://leetcode.com/problems/number-of-zero-filled-subarrays/description/
+Link :https://leetcode.com/problems/two-sum/
 
-Difficulty : Medium
+Difficulty :Easy
 
-Title : 2348. Number of Zero-Filled Subarrays
+Title : 1. Two Sum   
 
-Description : 
-    Given an integer array nums, return the number of subarrays filled with 0.
-    A subarray is a contiguous non-empty sequence of elements within an array.
+Description:
+    Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
+    You may assume that each input would have exactly one solution, and you may not use the same element twice.
+    You can return the answer in any order.
 
 Example 1:
-    Input: nums = [1,3,0,0,2,0,0,4]
-    Output: 6
-    Explanation: 
-    There are 4 occurrences of [0] as a subarray.
-    There are 2 occurrences of [0,0] as a subarray.
-    There is no occurrence of a subarray with a size more than 2 filled with 0. Therefore, we return 6.
+    Input: nums = [2,7,11,15], target = 9
+    Output: [0,1]
+    Explanation: Because nums[0] + nums[1] == 9, we return [0, 1].
 
 Example 2:
-    Input: nums = [0,0,0,2,0,0]
-    Output: 9
-    Explanation:
-    There are 5 occurrences of [0] as a subarray.
-    There are 3 occurrences of [0,0] as a subarray.
-    There is 1 occurrence of [0,0,0] as a subarray.
-    There is no occurrence of a subarray with a size more than 3 filled with 0. Therefore, we return 9.
+    Input: nums = [3,2,4], target = 6
+    Output: [1,2]
 
 Example 3:
-    Input: nums = [2,10,2019]
-    Output: 0
-    Explanation: There is no subarray filled with 0. Therefore, we return 0.
-
+    Input: nums = [3,3], target = 6
+    Output: [0,1]
+    
 Constraints:
-    1 <= nums.length <= 105
-        -109 <= nums[i] <= 109
+    2 <= nums.length <= 104
+    -109 <= nums[i] <= 109
+    -109 <= target <= 109
+    Only one valid answer exists.
+
+Follow-up: Can you come up with an algorithm that is less than O(n2) time complexity?
 '''
 
-class Solution(object):    
-    def zeroFilledSubarray(self, nums):
+class Solution(object):
+    def twoSum(self, nums, target):
         """
         :type nums: List[int]
-        :rtype: int
+        :type target: int
+        :rtype: List[int]
         """
-        retSum = 0
-        cnt = 0
-        for i in range(0,len(nums)):
-            if nums[i] == 0 :
-                retSum = retSum + 1
-                cnt = cnt + 1
-            else:
-                retSum += (cnt-1)*(cnt)/2
-                cnt = 0
-        if cnt != 0:
-            retSum += (cnt-1)*(cnt)/2
-        return retSum
+        result = []
+        size = len(nums)
+        for i in range(0,size):
+            for j in range(i+1,size):
+                if nums[i]+nums[j] == target:
+                        result.append(i)
+                        result.append(j)
+                        break
+        return result
     
-problem = Solution()    
-print(problem.zeroFilledSubarray([1,3,0,0,2,0,0,4]))
-print(problem.zeroFilledSubarray([0,0,0,2,0,0]))
-print(problem.zeroFilledSubarray([2,10,2019]))
+problem = Solution()
+
+print(problem.twoSum([2,7,11,15],9))
+print(problem.twoSum([3,2,4],6))
+print(problem.twoSum([3,3],6))
